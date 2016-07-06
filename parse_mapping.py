@@ -50,16 +50,18 @@ def mapping(mapping_file):
 	with open(mapping_file) as read:
 		header = itertools.islice(read,0,1)
 		data = itertools.islice(read,1,None)
+
 		for name, value in zip(header,data):
 			header = name
-			data = value
-		print "header length: ", len(header.split())
-		for index,name in enumerate(header.split()):	
+		for index,name in enumerate(header.split(',')):
 			if name not in ignore:
 				for line in data:
-					if line.split()[index]:
-						tmp.append((data.split()[index], name))
-						break	
+					if line.split(',')[index]:
+						tmp.append((line.split(',')[index], name))
+						break
+						
+
+						
 		for item in tmp:
 #			print item[0]
 			if is_number(item[0]):
